@@ -1,3 +1,5 @@
+#this code was written by Yohjustk in 2022
+
 #import libraries /ライブラリを読み込み
 import sensor, image, time,math,pyb
 from pyb import UART
