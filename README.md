@@ -1,4 +1,15 @@
 # robocup-soccer-openmv-camera-programs
-### The sample codes of openMV Cam to use in robocup soccer.
+## ロボカップジュニアサッカーでのopenMV CAMを用いたカメラ制御用サンプルプログラム群
 
-These codes were written in micro python with openMV IDE and uses openMV specific liblaries. So if you want to run it, you should use openMV IDE or download IDE from [here](https://openmv.io/pages/download)
+
+### 最初に
+これらのコードはロボカップジュニアサッカーワールドリーグでの使用を想定して作成されています。
+
+ロボカップジュニアサッカーワールドリーグのルールブックはこちら->[rule book](https://drive.google.com/file/d/1nENPlAM84UK_o8h0x2WjepuD2egbmoI7/view)
+
+
+これらのコードはopenMV IDE上で、micro pythonで書かれたものです。そのため使う場合はopenMV IDEを入手する必要があります。
+
+openMV IDE ダウンロードページ->[download](https://openmv.io/pages/download)
+
+#　機能
