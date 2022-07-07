@@ -3,12 +3,14 @@ __ロボカップジュニアサッカーでのopenMV CAMを用いたカメラ�
 
 
 ## 最初に
-これらのプログラムはロボカップジュニアサッカーワールドリーグでの使用を想定して作成されています。競技ルールについては[ルールブック](https://drive.google.com/file/d/1nENPlAM84UK_o8h0x2WjepuD2egbmoI7/view)を参照して下さい。
+- これらのプログラムはロボカップジュニアサッカーワールドリーグでの使用を想定して作成されています。競技ルールについては[ルールブック](https://drive.google.com/file/d/1nENPlAM84UK_o8h0x2WjepuD2egbmoI7/view)を参照して下さい。
 
+- これらのプログラムはopenMV IDE上で、micro pythonでopenMV独自のライブラリを用いて書かれたものです。そのため使う場合は[openMV IDE](https://openmv.io/pages/download)を入手することを推奨します。
 
-これらのプログラムはopenMV IDE上で、micro pythonでopenMV独自のライブラリを用いて書かれたものです。そのため使う場合は[openMV IDE](https://openmv.io/pages/download)を入手することを推奨します。
+- 近年、[全方位ミラー](https://yunit.techblog.jp/archives/70016697.html)とカメラを用いた画像認識方法がロボカップサッカーで多く使われるようになっています。このサンプルプログラム群も全方位ミラーとopenMV CAMを組み合わせて使用することを前提として作成されています。
 
-近年、[全方位ミラー](https://yunit.techblog.jp/archives/70016697.html)とカメラを用いた画像認識方法がロボカップサッカーで多く使われるようになっています。このサンプルプログラム群も全方位ミラーとopenMV CAMを組み合わせて使用することを前提として作成されています。
+- 基本的なカメラの画面情報を以下に示します。
+![screen_info](./sccreen_info.png)
 
 ## 機能・フローチャート
 このプログラム群は以下のような特徴を持ちます。
