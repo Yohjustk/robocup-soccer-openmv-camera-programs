@@ -71,6 +71,9 @@ def uart_sender():
     for i in range(4):
         uart.writechar(sent_data[i])
 
+clock = time.clock()
+uart = UART(3, 115200, timeout_char = 10) # uart start
+uart.init(115200, bits=8, parity=None, stop=1, timeout_char=1000)
 
 #main codes /メインコード
 while(True):

@@ -149,6 +149,9 @@ def enemy_checker(max_ang,min_ang,cent_ang):
     kick_ang = int((angle_mirror(shoot_ang)/360)*255)
     target_ang = kick_ang
 
+clock = time.clock()
+uart = UART(3, 115200, timeout_char = 10) # uart start
+uart.init(115200, bits=8, parity=None, stop=1, timeout_char=1000)
 
 #correct angle function /角度補正用関数
 def angle_mirror(angle):
