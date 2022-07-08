@@ -55,7 +55,7 @@ circulae_goal_scanner.pyと同じプログラムでゴール範囲を特定し�
 ゴールキーパーロボット用の自陣ゴールとの距離が遠くなりすぎないように保つプログラムです。
 基本的な部分はradial_enemy_scanner.pyと同様に角度ごとに自陣ゴールまでの距離を計測し、ゴールまでの距離が遠くなりすぎると一番ゴールまでの距離が近い角度に移動します。
 
-![own_goal_distance_keeeper.py フローチャート](./own_goal_didtance_keeper.png)
+![own_goal_distance_keeeper.py フローチャート](./own_goal_didtance_keeper_flowchart.png)
 
 ### [assembly_forward.py]()
 ### [assembly_goal_keeper]()
