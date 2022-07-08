@@ -59,7 +59,7 @@ circulae_goal_scanner.pyと同じプログラムでゴール範囲を特定し�
 
 ### [assembled_forward.py](https://github.com/Yohjustk/robocup-soccer-openmv-camera-programs/blob/master/assembled_forward.py)
 ### [assembled_goal_keeper.py](https://github.com/Yohjustk/robocup-soccer-openmv-camera-programs/blob/master/assembled_goal_keeper.py)
-[assembled_forward.py](https://github.com/Yohjustk/robocup-soccer-openmv-camera-programs/blob/master/assembled_forward.py)がフォワードロボット用プログラム、[assembled_goal_keeper.py]()がゴールキーパー用プログラムとして私が例としてこれまでのサンプルプログラム群をベースに組み立てたものです。
+[assembled_forward.py](https://github.com/Yohjustk/robocup-soccer-openmv-camera-programs/blob/master/assembled_forward.py)がフォワードロボット用プログラム、[assembled_goal_keeper.py]()がゴールキーパー用プログラムとして私が例としてこれまでのサンプルプログラム群をベースに組み立てたものです。基本的な動作を行うように作成しましたが、これらに手を加えていけば、「ボールを抱えた状態で後ろを向いて移動するようにして、ボールを敵ロボットに取られにくくする」というような動きをすることも可能です。また、assembled_forward.py ではボールの所持を確認する項目がありますが、これには別途その判断を行うセンサ（今回は光センサ）を用意する必要があります。
 
 **assembled_forward.pyフローチャート**
 

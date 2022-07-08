@@ -17,7 +17,6 @@ sensor. set_auto_exposure(False)
 
 #global variables declaration /グローバル変数を宣言
 ball_right = ADC('P6')         #光センサー入力ピン設定
-ball_kicker = Pin('P0', Pin.OUT_PP, Pin.PULL_NONE)#キッカー出力ピン設定
 right_thred = 2000 #光センサー閾値
 ball_threshold = [(30, 85, 35, 83, -10, 69)] #ball color threshold in LAB color space[Lmin,Lmax,Amin,Amax,Bmin,Bmax] / LAB色座標系でのボール色閾値[L最小値,L最大値,A最小値,A最大値,B最小値,B最大値]
 ball_cordinate1 = [] #ball sizes and x,ycordinates list /ボールサイズ・座標x,y一時格納用リスト
@@ -391,7 +390,7 @@ while(True):
                     angle_center = int((max_angle + min_angle)/2)
                     enemy_mg = (max_angle-min_angle)/10 #ゴール前に敵がいると判断する可変マージン
                     if max_angle < Lcorner_ang:
-                        
+
                         #ロボットがゴールの左角にいる
                         target_ang = int(135/360*255) #右斜め後ろを移動角度に設定
                         kick_ang = 0
@@ -408,8 +407,6 @@ while(True):
                     else:#ボールを所持かつゴールが見えている（ゴール角度問題なし）
                         radial_checker(max_angle, min_angle,angle_center)
                         uart_sender()
-                        time.sleep(0.1) #通信・移動処理待機
-                        ball_kicker.high() #キッカー起動　シュート
                         next_ang_maker(max_angle, min_angle)
                         continue
             else: #ボールを持っていない場合
