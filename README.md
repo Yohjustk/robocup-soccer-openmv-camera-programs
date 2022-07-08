@@ -57,5 +57,6 @@ circulae_goal_scanner.pyと同じプログラムでゴール範囲を特定し�
 
 ![own_goal_distance_keeeper.py フローチャート](./own_goal_distance_keeper_flowchart.png)
 
-### [assembly_forward.py]()
-### [assembly_goal_keeper]()
+### [assembled_forward.py](https://github.com/Yohjustk/robocup-soccer-openmv-camera-programs/blob/master/assembled_forward.py)
+### [assembled_goal_keeper.py]()
+[assembled_forward.py](https://github.com/Yohjustk/robocup-soccer-openmv-camera-programs/blob/master/assembled_forward.py)がフォワードロボット用プログラム、[assembled_goal_keeper.py]()がゴールキーパー用プログラムとして私が例としてこれまでのサンプルプログラム群をベースに組み立てたものです。
