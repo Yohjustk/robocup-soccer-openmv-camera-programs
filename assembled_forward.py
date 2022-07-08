@@ -391,6 +391,7 @@ while(True):
                     angle_center = int((max_angle + min_angle)/2)
                     enemy_mg = (max_angle-min_angle)/10 #ゴール前に敵がいると判断する可変マージン
                     if max_angle < Lcorner_ang:
+                        
                         #ロボットがゴールの左角にいる
                         target_ang = int(135/360*255) #右斜め後ろを移動角度に設定
                         kick_ang = 0

@@ -185,64 +185,28 @@ def radial_checker(max_ang,min_ang,cent_ang,split,start_radius,end_radius,appli_
                break
             appli_distance2 = [a for a in appli_distance if a !=0]
     
-    if mode == 1:
-       if len(appli_distance2) == 0: #何も検知できなかった
-           return
-       else:
-           R_avg = sum(appli_distance2)/len(appli_distance2) #ゴールにあたるまでの平均距離計算
-           R_min = min(appli_distance2)
-       for i in range(split): #ゴールまでの距離が著しく遠い（敵がいる）角度を探す
-           if appli_distance[i] > (R_avg + enemy_mg) or appli_distance[i] == 0 or appli_distance[i] < R_min:
-               img.draw_circle(appli_cord[i][0],appli_cord[i][1],1,color=(255,0,0))#//
-               appli_id1.append(appli_ang[i]) #敵がいると思われる角度を格納
-       if len(appli_id1) > 0: #敵が検知できた場合（リストに要素がある）
-           if (min(appli_id1) - min_ang) >= (max_ang - max(appli_id1)):#敵の左側の角度が空きが大きい場合
-               shoot_ang = (min(appli_id1) + min_ang)/2 - shoot_mg
-           else: #if (min(enemy_id2) - min_ang) < (min_ang - max(enemy_id2)):#敵の右側の角度が空きが大きい場合
-               shoot_ang = (max(appli_id1) + max_ang)/2 + shoot_mg
-       #print(shoot_ang) #//
-       Xshot = X_table1[int(shoot_ang)] #//
-       Yshot = Y_table1[int(shoot_ang)] #//
-       img.draw_line(center_x,center_y,Xshot ,Yshot ,color = (0,255,0)) #//
-       #kick_ang = int((angle_mirror(shoot_ang)/360)*255)#ボールを打つべき角度を送信用８ビットへ変換----------------------------------------
-       #target_ang = kick_ang
-       sent_data[3] = int((angle_mirror(shoot_ang,1)/360)*255,1)#ボールを打つべき角度を送信用８ビットへ変換----------------------------------------
-       sent_data[1] = sent_data[3]
-       return
-
-    elif mode == 0:
-       if len(appli_distance2) == 0: #何も検知できなかった
-           return 2
-       else:
-           min_distance = min(appli_distance2)
-           app_index = appli_distance.index(min_distance)
-           appli_lange = 1.3242*math.exp(0.0388*min_distance)#ゴール距離を計算
-           if appli_lange >= 20:#ゴール距離が遠すぎないか
-               print("lange over")
-               sent_data[3] = 0
-               #kick_ang = 0
-               shoot_ang = appli_ang[app_index]
-               Xshot = X_table1[int(shoot_ang)] #//
-               Yshot = Y_table1[int(shoot_ang)] #//
-               img.draw_line(center_x,center_y,Xshot ,Yshot ,color = (0,255,0)) #//
-               sent_data[1] = int((angle_mirror(shoot_ang,0)/360)*255)
-               #target_ang = int((angle_mirror(shoot_ang)/360)*255)
-               #print(target_ang)
-               uart_sender()
-               return 0
-           else:
-               return 1
-
-#function to dicide next circular scanning area /次の円形ゴールスキャン範囲決定用関数
-def next_ang_maker(max_ang, min_ang):
-    if (angle_center - angle_param) < angle_st_const:
-        angle_st = angle_st_const
+    if len(appli_distance2) == 0: #何も検知できなかった
+        return 2
     else:
-        angle_st = angle_center - angle_param
-    if (angle_center + angle_param) > angle_end_const:
-        angle_end = angle_end_const
-    else:
-        angle_end = angle_center + angle_param
+        min_distance = min(appli_distance2)
+        app_index = appli_distance.index(min_distance)
+        appli_lange = 1.3242*math.exp(0.0388*min_distance)#ゴール距離を計算
+        if appli_lange >= 20:#ゴール距離が遠すぎないか
+            print("lange over")
+            sent_data[3] = 0
+            #kick_ang = 0
+            shoot_ang = appli_ang[app_index]
+            Xshot = X_table1[int(shoot_ang)] #//
+            Yshot = Y_table1[int(shoot_ang)] #//
+            img.draw_line(center_x,center_y,Xshot ,Yshot ,color = (0,255,0)) #//
+            sent_data[1] = int((angle_mirror(shoot_ang,0)/360)*255)
+            #target_ang = int((angle_mirror(shoot_ang)/360)*255)
+            #print(target_ang)
+            uart_sender()
+            return 0
+        else:
+            return 1
+
 
 #Wrapping around function (you need adjust) /回り込み用関数（調整必要）
 def mawarikomi(ang, lange): 
@@ -370,56 +334,7 @@ while(True):
                 continue
 
             else: #ball wasn't detacted /ボールは検知されなかった
-                if (((ball_right.read() * 3.3) + 2047.5) / 4095) < right_thred: #ボールを持っている場合 調整必要
-                    angle_checkerA = []#内円探知結果リスト初期化
-                    angle_checkerB = []#外円探知結果リスト初期化
-                    angle_checkerC = []#中間円探知結果リスト初期化
-                    circle_checker(radius_1,angle_st+10,angle_end+10) #内側円周チェック
-                    circle_checker(radius_2,angle_st,angle_end) #外側円周チェック
-                    circle_checker(radius_3,angle_st+5,angle_end+5) #内側円周チェック
-                    min_angles = [] #最小角リスト
-                    max_angles = [] #最大角リスト
-                    if len(angle_checkerA) == 0 and len(angle_checkerB) == 0 and len(angle_checkerC) == 0: #なにも検知しなかった場合
-                        target_ang = 0
-                        kick_ang = 0 #正面角度（なにもしない）を送信
-                        angle_st = angle_st_const #次の円形スキャン範囲指定
-                        angle_end =angle_end_const
-                        uart_sender() #データ送信関数呼び出し
-                        continue #while最初へ
-                    else:
-                        for ang_array in[angle_checkerA, angle_checkerB,angle_checkerC]:
-                            if len(ang_array) > 0:#各円形スキャンの最大角と最小角を格納
-                                min_angles.append(min(ang_array))
-                                max_angles.append(max(ang_array))
-                            else:#円形スキャンでなにも検知されなかった場合はありえない値を格納
-                                min_angles.append(370)
-                                max_angles.append(-10)
-                        min_angle = min(min_angles)
-                        max_angle = max(max_angles)
-                        angle_center = int((max_angle + min_angle)/2)
-                        enemy_mg = (max_angle-min_angle)/10 #ゴール前に敵がいると判断する可変マージン
-                        if max_angle < Lcorner_ang:
-                            #ロボットがゴールの左角にいる
-                            target_ang = int(135/360*255) #右斜め後ろを移動角度に設定
-                            kick_ang = 0
-                            uart_sender()
-                            next_ang_maker(max_angle, min_angle)
-                            continue
-                        elif min_angle > Rcorner_ang:
-                            #ロボットがゴールの右角にいる
-                            target_ang = int(225/360*255) #左斜め後ろを移動角度に設定
-                            kick_ang = 0
-                            uart_sender()
-                            next_ang_maker(max_angle, min_angle)
-                            continue
-                        else:#ボールを所持かつゴールが見えている（ゴール角度問題なし）
-                            radial_checker(max_angle, min_angle,angle_center)
-                            uart_sender()
-                            time.sleep(0.1) #通信・移動処理待機
-                            ball_kicker.high() #キッカー起動　シュート
-                            next_ang_maker(max_angle, min_angle)
-                            continue
-                else: #ボールを持っていない場合
-                    kick_ang = 0
-                    uart_sender()
-                    continue
+                target_ang = 0
+                kick_ang = 0
+                uart_sender()
+                continue

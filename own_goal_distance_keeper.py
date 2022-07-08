@@ -153,3 +153,12 @@ while(True):
     print(clock.fps())
     radial_result=radial_checker(360,0,180,11,30,120,my_goal_threshold) #(スキャン終了角度、スキャン終了角度、スキャン中心角度、角度分割数、スキャン開始半径、スキャン終了半径、閾値、モード｛０＝自ゴール距離　１＝敵スキャン｝）
     #print(radial_result)
+    if radial_result == 0:
+        continue
+    elif radial_result == 1:#ゴールが遠くなかった→ボールを探す
+        continue
+    else: #ゴールを検知できなかった
+        sent_data[1] = 127#後ろ向きに移動------------------------------------------------------------------------------------------------------------------
+        sent_data[3] = 0
+        uart_sender()
+        continue
