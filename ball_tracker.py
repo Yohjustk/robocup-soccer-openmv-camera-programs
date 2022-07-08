@@ -144,5 +144,7 @@ while(True):
         continue
     else: #ball wasn't detacted /ボールは検知されなかった
         target_ang = 0
+        kick_ang = 0
+        uart_sender()
 
     img.draw_cross(center_x, center_y,color=(0,0,255)) #draw center pointer /画面中心に目標を描く
